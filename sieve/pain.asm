@@ -23,11 +23,22 @@ space: .asciiz " "
 
 ## Load in values in register
 main: 
+  li    $v0,    5               # Get integer from user
+  syscall       
+
+  slti  $t0,    $v0,    1001
+  beq   $t0,    $zero,  main
+  nop
+
+  slti  $t0,    $v0,    1
+  beq   $t0,    $zero,  main
+  nop
+
   li    $s0,    0x00000000
   li    $s1,    0x11111111
   add   $s2,    $sp,    0       # Store bottom stack address
   li    $s3,    1000    
-  li    $t0,    2               # Set counter to 2
+  move  $t0,    $v0             # Set counter to 2
   
   jal		init
   
